@@ -27,4 +27,12 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\JapeCore\JapeCore\JapeCore.csproj" />
+    <ProjectReference Include="..\JapeCore\JapeDatabase\JapeDatabase.csproj" />
+    <ProjectReference Include="..\JapeCore\JapeHttp\JapeHttp.csproj" />
+    <ProjectReference Include="..\JapeCore\JapeService\JapeService.csproj" />
+    <ProjectReference Include="..\JapeCore\JapeWeb\JapeWeb.csproj" />
+  </ItemGroup>
+
 </Project>

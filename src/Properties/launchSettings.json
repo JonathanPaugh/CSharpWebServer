@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CSharpWebServer": {
+      "commandName": "Project",
+      "commandLineArgs": "--http 8000"
+    }
+  }
+}
