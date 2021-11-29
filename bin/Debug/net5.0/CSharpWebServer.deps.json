@@ -1,0 +1,95 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "CSharpWebServer/1.0.0": {
+        "dependencies": {
+          "JapeCore": "1.0.0.0",
+          "JapeDatabase": "1.0.0.0",
+          "JapeHttp": "1.0.0.0",
+          "JapeService": "1.0.0.0",
+          "JapeWeb": "1.0.0.0"
+        },
+        "runtime": {
+          "CSharpWebServer.dll": {}
+        }
+      },
+      "JapeCore/1.0.0.0": {
+        "runtime": {
+          "JapeCore.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "JapeDatabase/1.0.0.0": {
+        "runtime": {
+          "JapeDatabase.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "JapeHttp/1.0.0.0": {
+        "runtime": {
+          "JapeHttp.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "JapeService/1.0.0.0": {
+        "runtime": {
+          "JapeService.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "JapeWeb/1.0.0.0": {
+        "runtime": {
+          "JapeWeb.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CSharpWebServer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "JapeCore/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "JapeDatabase/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "JapeHttp/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "JapeService/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "JapeWeb/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
