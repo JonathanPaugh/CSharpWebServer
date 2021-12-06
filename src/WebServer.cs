@@ -5,6 +5,7 @@ using JapeCore;
 using JapeDatabase;
 using JapeHttp;
 using JapeWeb;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
 namespace CSharpWebServer
@@ -18,35 +19,14 @@ namespace CSharpWebServer
 
         private readonly Templater templates;
 
-        private readonly Dictionary<string, Middleware.ResponseAsync> responses;
-
         private DatabaseApi database;
 
         public WebServer(int http, int https) : base(http, https)
         {
             templates = CreateTemplater("./template");
-
-            responses = GetResponses();
-
-            Use(Middleware.UseAsync(Respond));
-        }
-
-        private async Task<Middleware.Result> Respond(Middleware.Request request)
-        {
-            if (!request.Path.StartsWithSegments("/request", out PathString requestPath))
-            {
-                return request.Next();
-            }
-
-            foreach (KeyValuePair<string, Middleware.ResponseAsync> response in responses)
-            {
-                if (requestPath.StartsWithSegments(response.Key))
-                {
-                     return await response.Value.Invoke(request);
-                }
-            }
-
-            return request.Next();
+            Route("/template", "./template");
+            ResponseTree tree = CreateResponseTree("/request", RequestResponses); 
+            tree.Write(Log.WriteConsole);
         }
 
         protected override async Task OnStartAsync()

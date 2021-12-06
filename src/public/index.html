@@ -16,7 +16,7 @@
 		$(() => {
 			$("#test").click(() => {
 				$.ajax({
-					url: "/request/mongo",
+					url: "/request/mongo/insert",
 					method: "POST",
 					data: JSON.stringify({ key: "value" })
 				}).done((result) => {
