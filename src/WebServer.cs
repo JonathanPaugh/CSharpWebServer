@@ -6,7 +6,6 @@ using JapeDatabase;
 using JapeHttp;
 using JapeWeb;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 
 namespace CSharpWebServer
 {
@@ -24,9 +23,12 @@ namespace CSharpWebServer
         public WebServer(int http, int https) : base(http, https)
         {
             templates = CreateTemplater("./template");
-            Route("/template", "./template");
-            ResponseTree tree = CreateResponseTree("/request", RequestResponses); 
-            tree.Write(Log.WriteConsole);
+        }
+
+        protected override IEnumerator<IWebComponent> Components()
+        {
+            yield return Route("/template", "./template");
+            yield return CreateResponseTree("/request", RequestResponses);
         }
 
         protected override async Task OnStartAsync()

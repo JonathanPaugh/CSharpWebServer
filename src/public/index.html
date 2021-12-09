@@ -5,24 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-    	INDEX!
-    	<button id="test">Ayo</button>
+    	<a href="./database.html">Database Tests</a>
     </body>
     <script
 		src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 		crossorigin="anonymous"></script>
-    <script type="text/javascript">
-		$(() => {
-			$("#test").click(() => {
-				$.ajax({
-					url: "/request/mongo/insert",
-					method: "POST",
-					data: JSON.stringify({ key: "value" })
-				}).done((result) => {
-					console.log(result);
-				});
-			});
-		});
-    </script>
 </html>

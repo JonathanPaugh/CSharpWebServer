@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Index</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+
+        <input id="insert-data" type="text" placeholder="Data" />
+        <button id="insert-button">Insert Data</button>
+        <br />
+        <input id="insert-result" type="text" placeholder="Result" readonly />
+
+        <br />
+        <br />
+
+        <input id="get-id" type="text" placeholder="Id" />
+        <button id="get-button">Get By Id</button>
+        <br />
+        <input id="get-result" type="text" placeholder="Result" readonly />
+
+        <br />
+        <br />
+
+        <input id="update-id" type="text" placeholder="Id" />
+        <input id="update-data" type="text" placeholder="New Data" />
+        <button id="update-button">Update Data</button>
+        <br />
+        <input id="update-result" type="text" placeholder="Result" readonly />
+
+        <br />
+        <br />
+
+        <input id="remove-id" type="text" placeholder="Id" />
+        <button id="remove-button">Remove Data</button>
+        <br />
+        <input id="remove-result" type="text" placeholder="Result" readonly />
+
+        <br />
+        <br />
+
+        <input id="delete-id" type="text" placeholder="Id" />
+        <button id="delete-button">Delete Data</button>
+        <br />
+        <input id="delete-result" type="text" placeholder="Result" readonly />
+
+    </body>
+    <script
+		src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous"></script>
+    <script type="text/javascript">
+		$(() => {
+			$("#get-button").click(() => {
+                mongoGet($("#get-id").val(), result => 
+                {
+                    $("#get-result").val(result);
+                });
+			});
+
+            $("#insert-button").click(() => {
+                mongoInsert(
+                {
+                    input: $("#insert-data").val()
+                }, result => 
+                {
+                    $("#insert-result").val(result);
+                });
+            });
+
+            $("#update-button").click(() => {
+                mongoUpdate($("#update-id").val(),
+                {
+                    data: $("#update-data").val()
+                }, result => 
+                {
+                    $("#update-result").val(result);
+                });
+            });
+
+            $("#remove-button").click(() => {
+                mongoRemove($("#remove-id").val(),
+                [
+                    "input"
+                ], result => 
+                {
+                    $("#remove-result").val(result);
+                });
+            });
+
+            $("#delete-button").click(() => {
+                mongoDelete($("#delete-id").val(), result => 
+                {
+                    $("#delete-result").val(result);
+                });
+            });
+		});
+
+
+        function mongoGet(id, onComplete) {
+            request("/mongo/get",
+            {
+                "id": id
+            }, onComplete);
+        }
+
+        function mongoInsert(data, onComplete) {
+            request("/mongo/insert", data, onComplete);
+        }
+
+        function mongoUpdate(id, data, onComplete) {
+            request("/mongo/update",
+            {
+                "id": id,
+                "data": data
+            }, onComplete);
+        }
+
+        function mongoRemove(id, data, onComplete) {
+            request("/mongo/remove", {
+                "id": id,
+                "data": data
+            }, onComplete);
+        }
+
+        function mongoDelete(id, onComplete) {
+            request("/mongo/delete",
+            {
+                "id": id
+            }, onComplete);
+        }
+
+		function request(path, data, onComplete) {
+            $.ajax({
+                url: `/request${path}`,
+                method: "POST",
+                data: JSON.stringify(data)
+            }).done((result) => {
+                console.log(result);
+                onComplete(result);
+            });
+        }
+    </script>
+</html>
