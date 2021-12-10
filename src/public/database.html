@@ -71,7 +71,7 @@
             $("#update-button").click(() => {
                 mongoUpdate($("#update-id").val(),
                 {
-                    data: $("#update-data").val()
+                    input: $("#update-data").val()
                 }, result => 
                 {
                     $("#update-result").val(result);
