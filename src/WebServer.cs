@@ -12,9 +12,10 @@ namespace CSharpWebServer
     public partial class WebServer : JapeWeb.WebServer
     {
         private const int DatabasePort = 3000;
+        private const string DatabaseEnv = "API_CSHARP_WEBSERVER_DATABASE";
 
-        private static string MongoConnectionString => $"mongodb+srv://admin:{MongoPassword}@cluster0.z6vns.mongodb.net/default?retryWrites=true&w=majority";
-        private static string MongoPassword => Environment.GetEnvironmentVariable("API_CSHARP_WEBSERVER_MONGO");
+        private static string MongoConnectionString => $"mongodb+srv://admin:{DatabaseKey}@cluster0.z6vns.mongodb.net/default?retryWrites=true&w=majority";
+        private static string DatabaseKey => Environment.GetEnvironmentVariable(DatabaseEnv);
 
         private readonly Templater templates;
 
@@ -33,7 +34,7 @@ namespace CSharpWebServer
 
         protected override async Task OnStartAsync()
         {
-            database = new DatabaseApi(DatabasePort);
+            database = new DatabaseApi(DatabasePort, DatabaseEnv);
             database.UseMongo(MongoConnectionString);
             await database.Start();
         }
