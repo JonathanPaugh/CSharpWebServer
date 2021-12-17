@@ -34,7 +34,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="private\secret.html" />
     <None Remove="public\database.html" />
+    <None Remove="public\login.html" />
+    <None Remove="public\request.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="private\secret.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

@@ -46,20 +46,24 @@
 
     </body>
     <script
-		src="https://code.jquery.com/jquery-3.6.0.min.js"
-		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-		crossorigin="anonymous"></script>
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+    <script src="/request.js" type="text/javascript"></script>
     <script type="text/javascript">
-		$(() => {
-			$("#get-button").click(() => {
-                mongoGet($("#get-id").val(), result => 
+        var databaseName = "AjaxDatabase";
+        var collectionName = "AjaxCollection";
+
+        $(() => {
+            $("#get-button").click(() => {
+                mongoGet(databaseName, collectionName, $("#get-id").val(), result =>
                 {
                     $("#get-result").val(result);
                 });
-			});
+            });
 
             $("#insert-button").click(() => {
-                mongoInsert(
+                mongoInsert(databaseName, collectionName,
                 {
                     input: $("#insert-data").val()
                 }, result => 
@@ -69,7 +73,7 @@
             });
 
             $("#update-button").click(() => {
-                mongoUpdate($("#update-id").val(),
+                mongoUpdate(databaseName, collectionName, $("#update-id").val(),
                 {
                     input: $("#update-data").val()
                 }, result => 
@@ -79,7 +83,7 @@
             });
 
             $("#remove-button").click(() => {
-                mongoRemove($("#remove-id").val(),
+                mongoRemove(databaseName, collectionName, $("#remove-id").val(),
                 [
                     "input"
                 ], result => 
@@ -89,56 +93,58 @@
             });
 
             $("#delete-button").click(() => {
-                mongoDelete($("#delete-id").val(), result => 
+                mongoDelete(databaseName, collectionName, $("#delete-id").val(), result =>
                 {
                     $("#delete-result").val(result);
                 });
             });
-		});
+        });
 
-
-        function mongoGet(id, onComplete) {
-            request("/mongo/get",
+        function mongoGet(database, collection, id, onComplete) {
+            request("/request/mongo/get",
             {
+                "database": database,
+                "collection": collection,
                 "id": id
             }, onComplete);
         }
 
-        function mongoInsert(data, onComplete) {
-            request("/mongo/insert", data, onComplete);
+        function mongoInsert(database, collection, data, onComplete) {
+            request("/request/mongo/insert",
+            {
+                "database": database,
+                "collection": collection,
+                "data": data
+            }, onComplete);
         }
 
-        function mongoUpdate(id, data, onComplete) {
-            request("/mongo/update",
+        function mongoUpdate(database, collection, id, data, onComplete) {
+            request("/request/mongo/update",
             {
+                "database": database,
+                "collection": collection,
                 "id": id,
                 "data": data
             }, onComplete);
         }
 
-        function mongoRemove(id, data, onComplete) {
-            request("/mongo/remove", {
+        function mongoRemove(database, collection, id, data, onComplete) {
+            request("/request/mongo/remove", 
+            {
+                "database": database,
+                "collection": collection,
                 "id": id,
                 "data": data
             }, onComplete);
         }
 
-        function mongoDelete(id, onComplete) {
-            request("/mongo/delete",
+        function mongoDelete(database, collection, id, onComplete) {
+            request("/request/mongo/delete",
             {
+                "database": database,
+                "collection": collection,
                 "id": id
             }, onComplete);
-        }
-
-		function request(path, data, onComplete) {
-            $.ajax({
-                url: `/request${path}`,
-                method: "POST",
-                data: JSON.stringify(data)
-            }).done((result) => {
-                console.log(result);
-                onComplete(result);
-            });
         }
     </script>
 </html>
