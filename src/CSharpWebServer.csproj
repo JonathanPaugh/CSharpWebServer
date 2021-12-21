@@ -38,16 +38,13 @@
     <None Remove="public\database.html" />
     <None Remove="public\login.html" />
     <None Remove="public\request.js" />
+    <None Remove="public\template.html" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="private\secret.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MongoDB.Libmongocrypt" Version="1.2.2" />
   </ItemGroup>
 
 

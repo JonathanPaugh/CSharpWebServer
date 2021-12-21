@@ -1,10 +1,8 @@
-﻿using System;
-using JapeHttp;
+﻿using JapeHttp;
 using System.Linq;
 using System.Threading.Tasks;
 using JapeCore;
 using JapeWeb;
-using Microsoft.AspNetCore.Http;
 
 namespace CSharpWebServer
 {
@@ -24,7 +22,7 @@ namespace CSharpWebServer
         {
             try
             {
-                JsonData result = database.MongoGet(request.Json.GetString("database"), request.Json.GetString("collection"), request.Json.GetString("id"));
+                JsonData result = await databaseApi.MongoGet(request.Json.GetString("database"), request.Json.GetString("collection"), request.Json.GetString("id"));
                 return await request.Complete(Status.SuccessCode.Ok, result);
             }
             catch
@@ -37,8 +35,8 @@ namespace CSharpWebServer
         {
             try
             {
-                string result = database.MongoInsert(request.Json.GetString("database"), request.Json.GetString("collection"), request.Json.Extract("data"));
-                return await request.Complete(Status.SuccessCode.Ok, result);
+                JsonData result = await databaseApi.MongoInsert(request.Json.GetString("database"), request.Json.GetString("collection"), request.Json.Extract("data"));
+                return await request.Complete(Status.SuccessCode.Ok, result.GetString("$oid"));
             }
             catch
             {
@@ -50,7 +48,7 @@ namespace CSharpWebServer
         {
             try
             {
-                JsonData result = database.MongoUpdate(request.Json.GetString("database"), request.Json.GetString("collection"), request.Json.GetString("id"), request.Json.Extract("data"));
+                JsonData result = await databaseApi.MongoUpdate(request.Json.GetString("database"), request.Json.GetString("collection"), request.Json.GetString("id"), request.Json.Extract("data"));
                 return await request.Complete(Status.SuccessCode.Ok, result);
             }
             catch
@@ -63,7 +61,7 @@ namespace CSharpWebServer
         {
             try
             {
-                JsonData result = database.MongoRemove(request.Json.GetString("database"), request.Json.GetString("collection"), request.Json.GetString("id"), request.Json.GetStringArray("data").ToArray());
+                JsonData result = await databaseApi.MongoRemove(request.Json.GetString("database"), request.Json.GetString("collection"), request.Json.GetString("id"), request.Json.GetStringArray("data").ToArray());
                 return await request.Complete(Status.SuccessCode.Ok, result);
             }
             catch
@@ -76,7 +74,7 @@ namespace CSharpWebServer
         {
             try
             {
-                JsonData result = database.MongoDelete(request.Json.GetString("database"), request.Json.GetString("collection"), request.Json.GetString("id"));
+                JsonData result = await databaseApi.MongoDelete(request.Json.GetString("database"), request.Json.GetString("collection"), request.Json.GetString("id"));
                 return await request.Complete(Status.SuccessCode.Ok, result);
             }
             catch
@@ -95,7 +93,7 @@ namespace CSharpWebServer
             JsonData result;
             try
             {
-                result = database.MongoGet("authentication", "users", user);
+                result = await databaseApi.MongoGet("authentication", "users", user);
             }
             catch
             {
