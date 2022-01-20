@@ -28,6 +28,7 @@ namespace CSharpWebServer
         {
             database = new Database(DatabasePort, 0, DatabaseKey);
             database.UseMongo(MongoConnectionString);
+
             await database.Start();
 
             databaseApi = new DatabaseApi(DatabasePort, DatabaseKey);
