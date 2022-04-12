@@ -1,6 +1,6 @@
 # CSharpWebServer
 ## Component Based Web Server
-This project is a skeleton for a webserver using my personal C# tools. \
+This project is a skeleton for a web server using my personal C# tools. \
 The listener is run by an ASP.NET Kestrel server.
 
 ## Overview
